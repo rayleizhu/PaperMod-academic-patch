@@ -20,3 +20,4 @@ TBA
 - [ ] Publication template (sort by year, sort by topic) 
 - [ ] full News page
 - [ ] other custom page templates (recruitment, teaching, etc.)
+- [ ] last updated timestamp on homepage
