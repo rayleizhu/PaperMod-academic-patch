@@ -1,0 +1,236 @@
+<div class="academic-home">
+  <div class="profile-section">
+    <div class="profile-content">
+      {{- if site.Params.profileMode.imageUrl }}
+      <div class="profile-image">
+        {{- $img := "" }}
+        {{- if not (urls.Parse site.Params.profileMode.imageUrl).IsAbs }}
+            {{- $img = resources.Get site.Params.profileMode.imageUrl }}
+        {{- end }}
+        {{- if $img }}
+            {{- $processableFormats := (slice "jpg" "jpeg" "png" "tif" "bmp" "gif") -}}
+            {{- if hugo.IsExtended -}}
+                {{- $processableFormats = $processableFormats | append "webp" -}}
+            {{- end -}}
+            {{- $prod := (hugo.IsProduction | or (eq site.Params.env "production")) }}
+            {{- if and (in $processableFormats $img.MediaType.SubType) (eq $prod true)}}
+                {{- if (not (and (not site.Params.profileMode.imageHeight) (not site.Params.profileMode.imageWidth))) }}
+                    {{- $img = $img.Resize (printf "%dx%d" site.Params.profileMode.imageWidth site.Params.profileMode.imageHeight) }}
+                {{- else if site.Params.profileMode.imageHeight }}
+                    {{- $img = $img.Resize (printf "x%d" site.Params.profileMode.imageHeight) }}
+                {{ else if site.Params.profileMode.imageWidth }}
+                    {{- $img = $img.Resize (printf "%dx" site.Params.profileMode.imageWidth) }}
+                {{ else }}
+                    {{- $img = $img.Resize "200x200" }}
+                {{- end }}
+            {{- end }}
+            <img draggable="false" src="{{ $img.Permalink }}" alt="{{ site.Params.profileMode.imageTitle | default "profile image" }}" title="{{ site.Params.profileMode.imageTitle }}"
+                height="{{ site.Params.profileMode.imageHeight | default 200 }}" width="{{ site.Params.profileMode.imageWidth | default 200 }}" />
+        {{- else }}
+        <img draggable="false" src="{{ site.Params.profileMode.imageUrl | absURL }}" alt="{{ site.Params.profileMode.imageTitle | default "profile image" }}" title="{{ site.Params.profileMode.imageTitle }}"
+            height="{{ site.Params.profileMode.imageHeight | default 200 }}" width="{{ site.Params.profileMode.imageWidth | default 200 }}" />
+        {{- end }}
+      </div>
+      {{- end }}
+      
+      <div class="profile-info">
+        <h1 class="profile-name">{{ site.Params.profileMode.title | default site.Title | markdownify }}</h1>
+        {{- if site.Params.profileMode.subtitle }}
+        <h2 class="profile-position">{{ site.Params.profileMode.subtitle | markdownify }}</h2>
+        {{- end }}
+        {{- if site.Params.profileMode.affiliation }}
+        <h3 class="profile-affiliation">{{ site.Params.profileMode.affiliation | markdownify }}</h3>
+        {{- end }}
+        {{- if site.Params.profileMode.email }}
+        <p class="profile-email">
+          <span>📧 </span>
+          <a href="mailto:{{ site.Params.profileMode.email }}">{{ site.Params.profileMode.email }}</a>
+        </p>
+        {{- end }}
+        {{- partial "social_icons.html" (dict) -}}
+      </div>
+    </div>
+  </div>
+
+  <div class="content-wrapper">
+    <div class="main-content">
+
+  {{- $about := site.GetPage "about" }}
+  {{- if $about }}
+  <section id="about" class="about-section">
+    <h2>About Me</h2>
+    <div class="post-content">
+      {{- if not ($about.Param "disableAnchoredHeadings") }}
+      {{- partial "anchored_headings.html" $about.Content -}}
+      {{- else }}{{ $about.Content }}{{ end }}
+    </div>
+  </section>
+  {{- end }}
+
+  {{- $newsPage := site.GetPage "news" }}
+  {{- $news := $newsPage.Pages }}
+  {{- if $news }}
+  <section id="news" class="news-section">
+    <h2>Latest News</h2>
+    <div class="news-list">
+      {{- range first 5 $news }}
+      <div class="news-item">
+        <span class="news-date">{{ .Date.Format "2006-01-02" }}</span>
+        <span class="news-content">{{ .Content }}</span>
+      </div>
+      {{- end }}
+    </div>
+  </section>
+  {{- end }}
+
+  {{- $pubsPage := site.GetPage "pubs" }}
+  {{- $pubs := $pubsPage.Pages }}
+  {{- $selectedPubs := where $pubs "Params.selected" true }}
+  {{- if $selectedPubs }}
+  <section id="publications" class="selected-publications">
+    <h2>Selected Publications
+      {{- $googleScholarUrl := "" }}
+      {{- range site.Params.socialIcons }}
+        {{- if eq .name "googlescholar" }}
+          {{- $googleScholarUrl = .url }}
+        {{- end }}
+      {{- end }}
+      {{- if $googleScholarUrl }}
+      <a href="{{ $googleScholarUrl }}" target="_blank" class="full-list-link">[Full List]</a>
+      {{- end }}
+    </h2>
+    <div class="publications-legend" style="font-size: 0.8rem; margin-bottom: 0.3rem; text-align: left;">
+      * Equal contribution; <sup>✉</sup> Corresponding author
+    </div>
+    <div class="publications-list">
+      {{- range $selectedPubs }}
+      <article class="publication-item">
+        {{- if .Params.preview }}
+        <div class="publication-image">
+           {{- $previewPage := site.GetPage "pubs/preview" }}
+           {{- $image := "" }}
+           {{- if $previewPage }}
+               {{- $image = $previewPage.Resources.GetMatch .Params.preview }}
+           {{- end }}
+           {{- if $image }}
+           <img src="{{ $image.RelPermalink }}" alt="{{ .Title }}" loading="lazy">
+           {{- else }}
+           <img src="{{ "images/" | absURL }}{{ .Params.preview }}" alt="{{ .Title }}" loading="lazy">
+           {{- end }}
+        </div>
+        {{- end }}
+        <div class="publication-content">
+          <h3 class="publication-title">
+              {{- if .Params.full_text }}
+              <a href="{{ .Params.full_text }}" target="_blank">{{ .Title }}</a>
+              {{- else if .Params.html }}
+              <a href="{{ .Params.html }}" target="_blank">{{ .Title }}</a>
+              {{- else }}
+              {{ .Title }}
+              {{- end }}
+          </h3>
+          <p class="publication-authors">
+              {{- $authors := .Params.authors }}
+              {{- $equal_contributors := .Params.equal_contributors | default slice }}
+              {{- $corresponding_authors := .Params.corresponding_authors | default slice }}
+              {{- range $index, $author := $authors }}
+                  {{- if eq $author site.Params.profileMode.nameInPub }}<strong>{{ $author }}</strong>{{- else }}{{ $author }}{{- end }}
+                  {{- if in $equal_contributors $author }}*{{ end }}
+                  {{- if in $corresponding_authors $author }}<sup>✉</sup>{{ end }}
+                  {{- if ne (add $index 1) (len $authors) }}, {{ end }}
+              {{- end }}
+          </p>
+          <p class="publication-venue">
+            {{- if .Params.abbr }}
+            <span class="venue-badge">{{ .Params.abbr }} {{ .Params.year }}</span>
+            {{- end }}
+            {{- if .Params.award }}
+            <span class="venue-badge award">🏆 {{ .Params.award }}</span>
+            {{- end }}
+            {{ .Params.venue }}
+          </p>
+          {{- if .Content }}
+          <div class="publication-description">{{ .Content }}</div>
+          {{- end }}
+          <div class="publication-links">
+              {{- if .Params.full_text }}<a href="{{ .Params.full_text }}" class="pub-link" target="_blank"><span>📄 Paper</span></a>{{- end }}
+              {{- if .Params.html }}<a href="{{ .Params.html }}" class="pub-link" target="_blank"><span>📄 Paper</span></a>{{- end }}
+              {{- if .Params.poster }}<a href="{{ .Params.poster }}" class="pub-link" target="_blank"><span>📊 Poster</span></a>{{- end }}
+              {{- if .Params.website }}<a href="{{ .Params.website }}" class="pub-link" target="_blank"><span>🌐 Website</span></a>{{- end }}
+              {{- if .Params.code }}
+              <a href="{{ .Params.code }}" class="pub-link" target="_blank"><span>💻 Code</span></a>
+              {{- $u := urls.Parse .Params.code -}}
+              {{- if eq $u.Host "github.com" -}}
+              <a href="{{ .Params.code }}" target="_blank" style="display: inline-flex; align-items: center;"><img src="https://img.shields.io/github/stars{{ $u.Path }}?style=social&label=Stars" alt="GitHub stars"></a>
+              {{- end -}}
+              {{- end }}
+          </div>
+        </div>
+      </article>
+      {{- end }}
+    </div>
+  </section>
+  {{- end }}
+
+  {{- if site.Params.profileMode.experience }}
+  <section id="experience" class="experience-section">
+    <h2>Experience</h2>
+    <div class="experience-list">
+      {{- range site.Params.profileMode.experience }}
+      <div class="experience-item">
+        <div class="experience-details">
+          {{- if .description }}
+          <p class="experience-description">{{ .description | markdownify }}</p>
+          {{- end }}
+        </div>
+        <div class="experience-period">{{ .period }}</div>
+      </div>
+      {{- end }}
+    </div>
+  </section>
+  {{- end }}
+
+  {{- if site.Params.profileMode.awards }}
+  <section id="awards" class="awards-section">
+    <h2>Selected Awards</h2>
+    <div class="awards-list">
+      {{- range site.Params.profileMode.awards }}
+      <div class="award-item">
+        <span class="award-year">{{ .year }}</span>
+        <span class="award-name">{{ .name }}</span>
+        {{- if .organization }}
+        <span class="award-organization">{{ .organization }}</span>
+        {{- end }}
+      </div>
+      {{- end }}
+    </div>
+  </section>
+  {{- end }}
+
+    </div>
+    {{- if site.Params.profileMode.showToc }}
+    <aside class="toc-sidebar">
+      <div class="toc-container">
+        <h3 class="toc-title">Table of Contents</h3>
+        <ul class="toc-list">
+          {{- if site.GetPage "about" }}
+          <li><a href="#about">About Me</a></li>
+          {{- end }}
+          {{- if (site.GetPage "news").Pages }}
+          <li><a href="#news">Latest News</a></li>
+          {{- end }}
+          {{- if where (site.GetPage "pubs").Pages "Params.selected" true }}
+          <li><a href="#publications">Selected Publications</a></li>
+          {{- end }}
+          {{- if site.Params.profileMode.experience }}
+          <li><a href="#experience">Experience</a></li>
+          {{- end }}
+          {{- if site.Params.profileMode.awards }}
+          <li><a href="#awards">Awards & Honors</a></li>
+          {{- end }}
+        </ul>
+      </div>
+    </aside>
+    {{- end }}
+  </div>
+</div>
