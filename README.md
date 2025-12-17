@@ -14,10 +14,10 @@ TBA
 
 - [ ] site template using this theme patch
 - [ ] usage instructions
-- [ ] adaptive layout for multiple devices
+- [x] adaptive layout for multiple devices
 - [ ] professional service section
 - [ ] merge header and About Section
 - [ ] Publication template (sort by year, sort by topic) 
 - [ ] full News page
 - [ ] other custom page templates (recruitment, teaching, etc.)
-- [ ] last updated timestamp on homepage
+- [x] last updated timestamp on homepage
