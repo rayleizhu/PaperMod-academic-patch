@@ -15,13 +15,13 @@
             {{- $prod := (hugo.IsProduction | or (eq site.Params.env "production")) }}
             {{- if and (in $processableFormats $img.MediaType.SubType) (eq $prod true)}}
                 {{- if (not (and (not site.Params.profileMode.imageHeight) (not site.Params.profileMode.imageWidth))) }}
-                    {{- $img = $img.Resize (printf "%dx%d" site.Params.profileMode.imageWidth site.Params.profileMode.imageHeight) }}
+                    {{- $img = $img.Resize (printf "%dx%d" (mul site.Params.profileMode.imageWidth 3) (mul site.Params.profileMode.imageHeight 3)) }}
                 {{- else if site.Params.profileMode.imageHeight }}
-                    {{- $img = $img.Resize (printf "x%d" site.Params.profileMode.imageHeight) }}
+                    {{- $img = $img.Resize (printf "x%d" (mul site.Params.profileMode.imageHeight 3)) }}
                 {{ else if site.Params.profileMode.imageWidth }}
-                    {{- $img = $img.Resize (printf "%dx" site.Params.profileMode.imageWidth) }}
+                    {{- $img = $img.Resize (printf "%dx" (mul site.Params.profileMode.imageWidth 3)) }}
                 {{ else }}
-                    {{- $img = $img.Resize "200x200" }}
+                    {{- $img = $img.Resize "600x600" }}
                 {{- end }}
             {{- end }}
             <img draggable="false" src="{{ $img.Permalink }}" alt="{{ site.Params.profileMode.imageTitle | default "profile image" }}" title="{{ site.Params.profileMode.imageTitle }}"
@@ -50,6 +50,9 @@
         {{- partial "social_icons.html" (dict) -}}
       </div>
     </div>
+    <div class="mobile-social">
+      {{- partial "social_icons.html" (dict) -}}
+    </div>
   </div>
 
   <div class="content-wrapper">
@@ -59,7 +62,7 @@
   {{- if $about }}
   <section id="about" class="about-section">
     <h2>About Me</h2>
-    <div class="post-content">
+    <div class="about-content">
       {{- if not ($about.Param "disableAnchoredHeadings") }}
       {{- partial "anchored_headings.html" $about.Content -}}
       {{- else }}{{ $about.Content }}{{ end }}
@@ -76,7 +79,7 @@
       {{- range first 5 $news }}
       <div class="news-item">
         <span class="news-date">{{ .Date.Format "2006-01-02" }}</span>
-        <span class="news-content">{{ .Content }}</span>
+        <span class="news-content">{{ .Summary }}</span>
       </div>
       {{- end }}
     </div>

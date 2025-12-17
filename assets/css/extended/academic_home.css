@@ -27,21 +27,21 @@
 
 .profile-info h1.profile-name {
   margin: 0 0 0.3rem 0;
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: 600;
   line-height: 1.2;
 }
 
 .profile-info h2.profile-position {
   margin: 0 0 0.3rem 0;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 400;
   color: var(--secondary);
 }
 
 .profile-info h3.profile-affiliation {
   margin: 0 0 0.8rem 0;
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 400;
   color: var(--secondary);
 }
@@ -49,6 +49,10 @@
 .profile-email {
   margin: 0.8rem 0;
   font-size: 0.95rem;
+}
+
+.mobile-social {
+  display: none;
 }
 
 .about-section,
@@ -82,6 +86,7 @@
 .news-item {
   display: flex;
   gap: 0.8rem;
+  align-items: baseline;
   padding: 0.2rem 0;
   border-bottom: 1px solid var(--border);
 }
@@ -90,7 +95,11 @@
   flex-shrink: 0;
   font-weight: 600;
   color: var(--primary);
-  width: 90px;
+  /* Reserve fixed column width for YYYY-MM-DD */
+  flex: 0 0 10ch;
+  width: 10ch;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
   font-size: 0.85rem;
 }
 
@@ -214,6 +223,7 @@
   color: var(--secondary);
   font-style: italic;
   font-size: 0.85rem;
+  white-space: nowrap;
 }
 
 /* Publications Section Styles */
@@ -394,47 +404,104 @@
   }
   
   .profile-content {
-    flex-direction: column;
-    text-align: center;
-    gap: 1rem;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    gap: 0.9rem;
+    flex-wrap: nowrap;
   }
   
   .profile-info h1.profile-name {
-    font-size: 1.8rem;
+    font-size: 1.2rem;
   }
   
   .profile-info h2.profile-position {
-    font-size: 1.1rem;
+    font-size: 1.0rem;
+  }
+
+  .profile-info h3.profile-affiliation {
+    font-size: 0.9rem;
+    line-height: 1.25;
+  }
+
+  /* Prevent wrapping: fix avatar size on small screens */
+  .profile-image {
+    flex: 0 0 120px;
+  }
+
+  .profile-image img {
+    width: 120px;
+    height: 120px;
+  }
+
+  /* On mobile: hide inline social icons, show dedicated row below */
+  .profile-info .social-icons {
+    display: none;
+  }
+
+  .mobile-social {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 0.6rem;
+    width: 100%;
   }
   
   .experience-item {
-    flex-direction: column;
-    gap: 0.5rem;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 0.6rem;
   }
   
   .experience-period {
-    width: auto;
+    /* keep a fixed right column for period on mobile */
+    flex: 0 0 12ch;
+    width: 12ch;
     font-size: 0.9rem;
+    white-space: nowrap;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
   }
   
   .award-item {
-    flex-direction: column;
-    gap: 0.3rem;
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 0.6rem;
+    flex-wrap: wrap;
   }
   
   .award-year {
-    width: auto;
+    /* keep fixed width for alignment */
+    flex: 0 0 6ch;
+    width: 6ch;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .award-organization {
+    flex: 1 1 100%;
+    margin-left: calc(6ch + 0.6rem);
+    white-space: normal;
   }
   
   .news-item {
-    flex-direction: column;
-    gap: 0.3rem;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 0.6rem;
   }
   
   .news-date {
-    width: auto;
+    /* keep fixed width on mobile for alignment */
+    flex-basis: 10ch;
+    width: 10ch;
     font-size: 0.9rem;
+  }
+  
+  /* Ensure content starts inline with the date */
+  .news-content p {
+    display: inline;
+    margin: 0;
   }
   
   /* Publications mobile responsive */
@@ -470,32 +537,32 @@
 }
 
 /* About Me section consistency */
-.about-section .post-content {
+.about-section .about-content {
   font-size: 0.9rem;
   line-height: 1.5;
 }
 
-.about-section .post-content p {
+.about-section .about-content p {
   margin-bottom: 0.8rem;
   font-size: 0.9rem;
 }
 
-.about-section .post-content h3 {
+.about-section .about-content h3 {
   font-size: 1.1rem;
   margin: 1rem 0 0.5rem 0;
 }
 
-.about-section .post-content h4 {
+.about-section .about-content h4 {
   font-size: 1rem;
   margin: 0.8rem 0 0.4rem 0;
 }
 
-.about-section .post-content ul,
-.about-section .post-content ol {
+.about-section .about-content ul,
+.about-section .about-content ol {
   font-size: 0.9rem;
 }
 
-.about-section .post-content li {
+.about-section .about-content li {
   margin-bottom: 0.3rem;
 }
 
@@ -584,7 +651,7 @@
     --link-color: #64b5f6;
 }
 
-.post-content a,
+.about-content a,
 .news-content a,
 .experience-description a,
 .publication-description a,
@@ -595,7 +662,7 @@
     text-underline-offset: 2px;
 }
 
-.post-content a:hover,
+.about-content a:hover,
 .news-content a:hover,
 .experience-description a:hover,
 .publication-description a:hover,
