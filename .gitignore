@@ -27,3 +27,4 @@ _testmain.go
 .hugo_build.lock
 resources/_gen/
 .vscode/
+themes/

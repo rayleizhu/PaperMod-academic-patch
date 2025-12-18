@@ -12,7 +12,7 @@ TBA
 
 ## TODO
 
-- [ ] site template using this theme patch
+- [x] site template using this theme patch
 - [ ] usage instructions
 - [x] adaptive layout for multiple devices
 - [ ] professional service section
