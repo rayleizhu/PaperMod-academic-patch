@@ -7,7 +7,6 @@ on:
       - "LICENSE"
       - "README.md"
     branches:
-      - master
       - exampleSite
   workflow_dispatch:
     # manual run
@@ -53,8 +52,8 @@ jobs:
         uses: actions/configure-pages@v5
       - name: Get Theme
         run: git submodule update --init --recursive
-      - name: Update theme to Latest commit
-        run: git submodule update --remote --merge
+      # - name: Update theme to Latest commit # this may cause issues if there are breaking changes
+      #   run: git submodule update --remote --merge
       - name: Build with Hugo
         run: |
           hugo \
