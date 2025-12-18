@@ -1,0 +1,247 @@
+# If your site is in 'https', then make sure your base url isn't written using 'http' otherwise your sitemap would
+# contain http (as opposeed to https) URLs. This would affect Google indexing of your URLs.
+baseURL: "https://rayleizhu.github.io/paper-mod-academic/"
+title: PaperMod-Academic-demo
+copyright: "© [ZHU Lei](https://github.com/rayleizhu) & Contributors"
+theme: [PaperMod-academic-patch, hugo-PaperMod]
+
+params:
+  env: production # to enable google analytics, opengraph, twitter-cards and schema.
+  description: "Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod"
+  author: Theme PaperMod
+  # author: ["Me", "You"] # multiple authors
+
+  defaultTheme: auto
+  # disableThemeToggle: true
+  ShowShareButtons: true
+  ShowReadingTime: true
+  # disableSpecial1stPost: true
+  displayFullLangName: true
+  ShowPostNavLinks: true
+  ShowBreadCrumbs: true
+  ShowCodeCopyButtons: true
+  ShowRssButtonInSectionTermList: true
+  ShowAllPagesInArchive: true
+  ShowPageNums: true
+  ShowToc: true
+  # comments: false
+  images: ["images/papermod-cover.png"]
+
+  profileMode:
+    enabled: true # Disable profile mode to use academic layout
+    imageUrl: "images/prof_pic.webp"  # Replace with your profile image
+    imageTitle: "Your Image Name"
+    imageWidth: 200
+    imageHeight: 200
+    #######################
+    academic: true
+    showToc: false
+    title: "Your Name"
+    nameInPub: "Your Name"
+    subtitle: "Your Profession"
+    affiliation: "Your Affiliation"
+    email: "your.email@example.com"
+    experience:
+      - period: "1933 - 1955"
+        description: "Professor, Institute for Advanced Study (Princeton)."
+      - period: "1914 - 1932"
+        description: "Member, Prussian Academy of Sciences; Professor, Humboldt University of Berlin."
+      - period: "1912 - 1914"
+        description: "Professor, ETH Zurich."
+      - period: "1909 - 1911"
+        description: "Professor, University of Zurich."
+      - period: "1902 - 1909"
+        description: "Patent Examiner, Swiss Patent Office (Bern)."
+    awards:
+      - year: "1935"
+        name: "Franklin Medal"
+        organization: "The Franklin Institute"
+      - year: "1925"
+        name: "Copley Medal"
+        organization: "The Royal Society"
+      - year: "1921"
+        name: "Nobel Prize in Physics"
+        organization: "The Royal Swedish Academy of Sciences"
+      - year: "1921"
+        name: "Matteucci Medal"
+        organization: "Accademia Nazionale delle Scienze"
+    #######################
+
+  socialIcons:
+    # - name: email
+    #   title: Email
+    #   url: "mailto:albert.einstein@example.com"
+    - name: github
+      title: GitHub
+      url: "https://github.com/einstein"
+    - name: googlescholar
+      title: Google Scholar
+      url: "https://scholar.google.com/citations?user=qc6CJjYAAAAJ&hl=en"
+    - name: linkedin
+      title: LinkedIn
+      url: "https://www.linkedin.com/in/albert-einstein-b6a6a8396/"
+    - name: orcid
+      title: ORCID
+      url: "https://orcid.org/0000-0000-0000-0000"
+    - name: openreview
+      title: OpenReview
+      url: "https://openreview.net/profile?id=~albert_einstein"
+    - name: dblp
+      title: DBLP
+      url: "https://dblp.org/search?q=Albert+Einstein"
+    # - name: cv
+    #   title: CV
+    #   url: "/cv.pdf"
+  
+  assets:
+    disableHLJS: true
+    # https://github.com/adityatelange/hugo-PaperMod/discussions/953#discussioncomment-4491216
+    # put your favicon file in 'static/assets/'
+    # you can generate favicons using https://favicon.io/favicon-generator/
+    favicon: "assets/favicon_ae/favicon.ico" 
+    favicon16x16:  "assets/favicon_ae/favicon-16x16.png"
+    favicon32x32:  "assets/favicon_ae/favicon-32x32.png"
+  #     apple_touch_icon: "<link / abs url>"
+  #     safari_pinned_tab: "<link / abs url>"
+
+  
+
+  homeInfoParams:
+    Title: "PaperMod's Demo"
+    Content: >
+      👋 Welcome to demo page of Hugo's theme PaperMod!
+
+      - **PaperMod**  is designed to be clean and simple but fast and responsive theme with useful feature-set that enhances UX.
+
+      - Feel free to show your support by giving us a star 🌟 on GitHub and sharing with your friends and social media .
+
+      - PaperMod is based on theme [Paper](https://github.com/nanxiaobei/hugo-paper/tree/4330c8b12aa48bfdecbcad6ad66145f679a430b3).
+
+  # editPost:
+  #   URL: "https://github.com/adityatelange/hugo-PaperMod/tree/exampleSite/content"
+  #   Text: "Suggest Changes" # edit text
+  #   appendFilePath: true # to append file path to Edit link
+
+  # label:
+  # iconSVG: '<svg xmlns="http://www.w3.org/2000/svg" height="25" viewBox="0 -960 960 960" fill="currentColor"><path d="M320-240h320v-80H320v80Zm0-160h320v-80H320v80ZM240-80q-33 0-56.5-23.5T160-160v-640q0-33 23.5-56.5T240-880h320l240 240v480q0 33-23.5 56.5T720-80H240Zm280-520v-200H240v640h480v-440H520ZM240-800v200-200 640-640Z"/></svg>'
+  # text: "Home"
+  # icon: icon.png
+  # iconHeight: 35
+
+  # analytics:
+  #     google:
+  #         SiteVerificationTag: "XYZabc"
+
+  # cover:
+  #     hidden: true # hide everywhere but not in structured data
+  #     hiddenInList: true # hide on list pages and home
+  #     hiddenInSingle: true # hide on single page
+
+  # fuseOpts:
+  #     isCaseSensitive: false
+  #     shouldSort: true
+  #     location: 0
+  #     distance: 1000
+  #     threshold: 0.4
+  #     minMatchCharLength: 0
+  #     keys: ["title", "permalink", "summary", "content"]
+
+###############################
+cascade: # prevent content/news/* and content/pubs/* from being rendered as regular pages
+  - _target:
+      path: /news/**
+    build:
+      render: never
+      list: local
+  - _target:
+      path: /pubs/**
+    build:
+      render: never
+      list: local
+  
+frontmatter:
+lastmod:
+  - lastmod
+  - :git
+  - date
+  - publishDate
+###############################
+
+enableInlineShortcodes: true
+enableRobotsTXT: true
+buildDrafts: false
+buildFuture: false
+buildExpired: false
+enableEmoji: true
+pygmentsUseClasses: true
+mainsections: ["posts", "papermod"]
+
+minify:
+  disableXML: true
+  # minifyOutput: true
+
+pagination:
+  disableAliases: false
+  pagerSize: 5
+
+languages:
+  en:
+    languageName: "English"
+    weight: 1
+    taxonomies:
+      category: categories
+      tag: tags
+      series: series
+    menu:
+      main:
+        - name: About
+          url: /
+          weight: 5
+        # - name: Publications
+        #   url: pubs/
+        #   weight: 8
+        - name: Blog
+          url: blog/
+          weight: 10
+
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+  highlight:
+    noClasses: false
+    # anchorLineNos: true
+    # codeFences: true
+    # guessSyntax: true
+    # lineNos: true
+    # style: monokai
+
+# privacy:
+#   vimeo:
+#     disabled: false
+#     simple: true
+
+#   twitter:
+#     disabled: false
+#     enableDNT: true
+#     simple: true
+
+#   instagram:
+#     disabled: false
+#     simple: true
+
+#   youtube:
+#     disabled: false
+#     privacyEnhanced: true
+
+services:
+  instagram:
+    disableInlineCSS: true
+  x:
+    disableInlineCSS: true
