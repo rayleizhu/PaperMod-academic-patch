@@ -1,0 +1,75 @@
+{{- $page := . -}}
+{{- $show_preview := true -}}
+{{- $show_description := true -}}
+{{- $show_links := true -}}
+
+{{- if reflect.IsMap . -}}
+  {{- $page = .page -}}
+  {{- if isset . "show_preview" }}{{ $show_preview = .show_preview }}{{ end -}}
+  {{- if isset . "show_description" }}{{ $show_description = .show_description }}{{ end -}}
+  {{- if isset . "show_links" }}{{ $show_links = .show_links }}{{ end -}}
+{{- end -}}
+
+{{- with $page -}}
+  <article class="publication-item">
+    {{- if and $show_preview .Params.preview }}
+    <div class="publication-image">
+      {{- $previewPage := site.GetPage "pubs/preview" }}
+      {{- $image := "" }}
+      {{- if $previewPage }}
+          {{- $image = $previewPage.Resources.GetMatch .Params.preview }}
+      {{- end }}
+      {{- if $image }}
+      <img src="{{ $image.RelPermalink }}" alt="{{ .Title }}" loading="lazy">
+      {{- else }}
+      <img src="{{ "images/" | absURL }}{{ .Params.preview }}" alt="{{ .Title }}" loading="lazy">
+      {{- end }}
+    </div>
+    {{- end }} {{/* end of publication-image */}}
+    <div class="publication-content">
+      <h3 class="publication-title">
+          {{- if .Params.full_text }}
+          <a href="{{ .Params.full_text }}" target="_blank">{{ .Title }}</a>
+          {{- else if .Params.html }}
+          <a href="{{ .Params.html }}" target="_blank">{{ .Title }}</a>
+          {{- else }}
+          {{ .Title }}
+          {{- end }}
+      </h3>
+      <p class="publication-authors">
+          {{- $authors := .Params.authors }}
+          {{- $equal_contributors := .Params.equal_contributors | default slice }}
+          {{- $corresponding_authors := .Params.corresponding_authors | default slice }}
+          {{- range $index, $author := $authors }}
+              {{- if or (eq $author site.Params.profileMode.nameInPub) }}<strong>{{ $author }}</strong>{{- else }}{{ $author }}{{- end }}
+              {{- if in $equal_contributors $author }}*{{ end }}
+              {{- if in $corresponding_authors $author }}<sup>✉</sup>{{ end }}
+              {{- if ne (add $index 1) (len $authors) }}, {{ end }}
+          {{- end }}
+      </p>
+      <p class="publication-venue">
+        <span class="venue-line">
+          {{- if .Params.abbr }}<span class="venue-badge">{{ .Params.abbr }}</span>{{- end }}
+          {{- if .Params.award }}<span class="venue-badge award">🏆 {{ .Params.award }}</span>{{- end }}
+          <span class="venue-text">{{ .Params.venue }}, {{ .Date.Format "2006" }}</span>
+        </span>
+      </p>
+      {{- if and $show_description .Content }}<div class="publication-description">{{ .Content }}</div>{{- end }}
+      {{- if $show_links }}
+        <div class="publication-links">
+          {{- if .Params.full_text }}<a href="{{ .Params.full_text }}" class="pub-link" target="_blank"><span>📄 Paper</span></a>{{- end }}
+          {{- if .Params.html }}<a href="{{ .Params.html }}" class="pub-link" target="_blank"><span>📄 Paper</span></a>{{- end }}
+          {{- if .Params.poster }}<a href="{{ .Params.poster }}" class="pub-link" target="_blank"><span>📊 Poster</span></a>{{- end }}
+          {{- if .Params.website }}<a href="{{ .Params.website }}" class="pub-link" target="_blank"><span>🌐 Website</span></a>{{- end }}
+          {{- if .Params.code }}
+            <a href="{{ .Params.code }}" class="pub-link" target="_blank"><span>💻 Code</span></a>
+            {{- $u := urls.Parse .Params.code -}}
+            {{- if eq $u.Host "github.com" -}}
+            <a href="{{ .Params.code }}" target="_blank" style="display: inline-flex; align-items: center;"><img src="https://img.shields.io/github/stars{{ $u.Path }}?style=social&label=Stars" alt="GitHub stars"></a>
+            {{- end -}}
+          {{- end }}
+        </div> {{/* end of publication-links */}}
+      {{- end }} {{/* end of show_links */}}
+    </div> {{/* end of publication-content */}}
+  </article>
+{{- end -}} {{/* end of with $page */}}

@@ -1,7 +1,99 @@
-{{ define "main" }}
-  {{ .Title }}
-  {{ .Content }}
-  {{ range .Site.RegularPages }}
-    <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
-  {{ end }}
-{{ end }}
+{{- define "main" -}}
+
+<div class="publications-page">
+  <header class="page-header">
+    <h1>{{ .Title }}</h1>
+    {{- if .Description }}
+    <div class="post-description">
+      {{ .Description }}
+    </div>
+    {{- end }}
+  </header> {{/* end of page-header */}}
+
+  <div class="publication-toggle">
+    <button id="toggle-topic" class="active" onclick="showByTopic()">By Topic</button>
+    <button id="toggle-year" onclick="showByYear()">By Year</button>
+  </div> {{/* end of publication-toggle */}}
+
+  <div id="list-by-topic" class="publication-list-section">
+    {{- $pages := .Pages -}}
+    {{- $topics := slice -}}
+    {{- range $pages -}}
+      {{- range .Params.topics -}}
+        {{- $topics = $topics | append . -}}
+      {{- end -}}
+    {{- end -}}
+    {{- $uniqueTopics := $topics | uniq | sort -}} {{/* Get unique sorted topics */ -}}
+    
+    {{- range $uniqueTopics }}
+      {{- $topic := . }}
+      <h2>{{ $topic }}</h2>
+      <div class="publication-list">
+        {{- range where $pages "Params.topics" "intersect" (slice $topic) }}
+        {{- partial "publication_item.html" (dict "page" . "show_preview" false "show_description" false "show_links" false) -}}
+        {{- end }}
+      </div>
+    {{- end }}  {{- /* end of unique topics */ -}}
+    {{- $otherPages := slice -}} 
+    {{- range $pages -}}
+      {{- if not .Params.topics -}}
+        {{- $otherPages = $otherPages | append . -}}
+      {{- end -}}
+    {{- end -}}
+    {{- if gt (len $otherPages) 0 }} {{- /* Render "Other" section if there are uncategorized publications */ -}}
+      <h2>Other</h2>
+      <div class="publication-list">
+        {{- range $otherPages }}
+        {{- partial "publication_item.html" (dict "page" . "show_preview" false "show_description" false "show_links" false) -}}
+        {{- end }}
+      </div>
+    {{- end }} {{- /* end of other publications */ -}}
+  </div>{{/* end of list-by-topic */}}
+
+  <div id="list-by-year" class="publication-list-section" style="display: none;">
+    {{- $currentYear := now.Format "2006" | int -}}
+    {{- $thresholdYear := sub $currentYear 4 -}}
+    {{- $olderPages := slice -}}
+    {{- range (.Pages.GroupByDate "2006") }}
+      {{- $year := .Key | int -}}
+      {{- if ge $year $thresholdYear }} {{- /* Recent years */ -}}
+        <h2>{{ .Key }}</h2>
+        <div class="publication-list">
+          {{- range .Pages }}
+          {{- partial "publication_item.html" (dict "page" . "show_preview" false "show_description" false "show_links" false) -}}
+          {{- end }}
+        </div>
+      {{- else }}
+        {{- range .Pages }}
+          {{- $olderPages = $olderPages | append . -}}
+        {{- end }} {{- /* end of constructing earlier publications */ -}}
+      {{- end }}
+    {{- end }}
+    {{- if gt (len $olderPages) 0 }}
+      <h2>Before {{ $thresholdYear }}</h2>
+      <div class="publication-list">
+        {{- range $olderPages }}
+        {{- partial "publication_item.html" (dict "page" . "show_preview" false "show_description" false "show_links" false) -}}
+        {{- end }}
+      </div>
+    {{- end }}
+  </div> {{/* end of list-by-year */}}
+</div> {{/* publications-page */}}
+
+<script>
+function showByYear() {
+  document.getElementById('list-by-year').style.display = 'block';
+  document.getElementById('list-by-topic').style.display = 'none';
+  document.getElementById('toggle-year').classList.add('active');
+  document.getElementById('toggle-topic').classList.remove('active');
+}
+
+function showByTopic() {
+  document.getElementById('list-by-year').style.display = 'none';
+  document.getElementById('list-by-topic').style.display = 'block';
+  document.getElementById('toggle-year').classList.remove('active');
+  document.getElementById('toggle-topic').classList.add('active');
+}
+</script>
+
+{{- end -}}

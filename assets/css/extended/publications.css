@@ -1,0 +1,52 @@
+.publications-page .page-header {
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+.publications-page .page-header h1 {
+  margin-top: 0;
+  margin-bottom: 5px;
+  font-size: 2rem;
+}
+
+.publications-page .post-description {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.publications-page .publication-toggle {
+  margin-bottom: 20px;
+  display: flex;
+  gap: 8px;
+}
+
+.publications-page .publication-toggle button {
+  cursor: pointer;
+  padding: 4px 12px;
+  border: 1px solid var(--secondary);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--secondary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: background 0.2s, color 0.2s;
+}
+
+.publications-page .publication-toggle button.active {
+  background: var(--secondary);
+  color: var(--theme);
+}
+
+.publications-page .publication-list-section h2 {
+  margin-top: 15px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 10px;
+  font-size: 1.3rem;
+}
+
+.publications-page .publication-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
