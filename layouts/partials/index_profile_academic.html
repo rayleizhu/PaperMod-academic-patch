@@ -75,14 +75,9 @@
   {{- if $selectedPubs }}
   <section id="publications" class="selected-publications">
     <h2>Selected Publications
-      {{- $googleScholarUrl := "" }}
+      {{- if $pubsPage }}<a href="{{ $pubsPage.Permalink }}" class="full-list-link">[Full List]</a>{{- end }}
       {{- range site.Params.socialIcons }}
-        {{- if eq .name "googlescholar" }}
-          {{- $googleScholarUrl = .url }}
-        {{- end }}
-      {{- end }}
-      {{- if $googleScholarUrl }}
-      <a href="{{ $googleScholarUrl }}" target="_blank" class="full-list-link">[Full List]</a>
+        {{- if eq .name "googlescholar" }}<a href="{{ .url }}" target="_blank" class="full-list-link">[Google Scholar]</a>{{- end }}
       {{- end }}
     </h2>
     <div class="publications-legend" style="font-size: 0.8rem; margin-bottom: 0.3rem; text-align: left;">
