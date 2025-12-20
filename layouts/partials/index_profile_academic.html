@@ -69,22 +69,6 @@
   </section>
   {{- end }}
 
-  {{- $newsPage := site.GetPage "news" }}
-  {{- $news := $newsPage.Pages }}
-  {{- if $news }}
-  <section id="news" class="news-section">
-    <h2>Latest News</h2>
-    <div class="news-list">
-      {{- range first 5 $news }}
-      <div class="news-item">
-        <span class="news-date">{{ .Date.Format "2006-01-02" }}</span>
-        <span class="news-content">{{ .Summary }}</span>
-      </div>
-      {{- end }}
-    </div>
-  </section>
-  {{- end }}
-
   {{- $pubsPage := site.GetPage "pubs" }}
   {{- $pubs := $pubsPage.Pages }}
   {{- $selectedPubs := where $pubs "Params.selected" true }}
@@ -169,6 +153,22 @@
           </div>
         </div>
       </article>
+      {{- end }}
+    </div>
+  </section>
+  {{- end }}
+
+  {{- $newsPage := site.GetPage "news" }}
+  {{- $news := $newsPage.Pages }}
+  {{- if $news }}
+  <section id="news" class="news-section">
+    <h2>Latest News</h2>
+    <div class="news-list">
+      {{- range first 5 $news }}
+      <div class="news-item">
+        <span class="news-date">{{ .Date.Format "2006-01-02" }}</span>
+        <span class="news-content">{{ .Summary }}</span>
+      </div>
       {{- end }}
     </div>
   </section>
