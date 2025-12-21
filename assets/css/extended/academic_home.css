@@ -5,17 +5,12 @@
   --section-gap: 1.2rem;
 }
 
-.profile-section,
-.about-section,
-.news-section,
-.recent-posts-section,
-.selected-publications,
-.experience-section,
-.awards-section {
+.home-header,
+.home-section {
   margin-bottom: var(--section-gap);
 }
 
-.profile-section {
+.home-header {
   /* margin-bottom: 1.5rem; */
   padding: 1.5rem 0;
   border-bottom: 1px solid var(--border);
@@ -66,12 +61,17 @@
   display: none;
 }
 
-.about-section h2,
-.news-section h2,
-.recent-posts-section h2,
-.selected-publications h2,
-.experience-section h2,
-.awards-section h2 {
+.home-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+#publications .home-list {
+  gap: 0.3rem;
+}
+
+.home-section h2 {
   font-size: 1.2rem;
   font-weight: 600;
   margin-bottom: 0.8rem;
@@ -79,13 +79,7 @@
   border-bottom: 2px solid var(--primary);
 }
 
-.news-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
-
-.news-item {
+.home-item {
   display: flex;
   gap: 0.8rem;
   align-items: baseline;
@@ -131,20 +125,6 @@
   color: var(--primary);
 }
 
-.experience-list,
-.awards-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
-
-.experience-item {
-  display: flex;
-  gap: 0.8rem;
-  padding: 0.2rem 0;
-  border-bottom: 1px solid var(--border);
-}
-
 .experience-period {
   flex-shrink: 0;
   font-weight: 600;
@@ -175,16 +155,8 @@
 
 .experience-description {
   margin: 0.1rem 0 0 0;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   line-height: 1.3;
-}
-
-.award-item {
-  display: flex;
-  gap: 0.6rem;
-  align-items: baseline;
-  padding: 0.2rem 0;
-  border-bottom: 1px solid var(--border);
 }
 
 .award-year {
@@ -213,12 +185,6 @@
   text-align: center;
   padding: 1.5rem;
   color: var(--secondary);
-}
-
-.publications-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
 }
 
 @media (max-width: 768px) {
@@ -271,10 +237,11 @@
     width: 100%;
   }
   
-  .experience-item {
+  .home-item {
     flex-direction: row;
     align-items: baseline;
     gap: 0.6rem;
+    flex-wrap: wrap;
   }
   
   .experience-period {
@@ -285,13 +252,6 @@
     white-space: nowrap;
     text-align: right;
     font-variant-numeric: tabular-nums;
-  }
-  
-  .award-item {
-    flex-direction: row;
-    align-items: baseline;
-    gap: 0.6rem;
-    flex-wrap: wrap;
   }
   
   .award-year {
@@ -306,12 +266,6 @@
     flex: 1 1 100%;
     margin-left: calc(6ch + 0.6rem);
     white-space: normal;
-  }
-  
-  .news-item {
-    flex-direction: row;
-    align-items: baseline;
-    gap: 0.6rem;
   }
   
   .news-date {
@@ -329,32 +283,32 @@
 }
 
 /* About Me section consistency */
-.about-section .about-content {
-  font-size: 0.95rem;
+.home-section .about-content {
+  font-size: 0.9rem;
   line-height: 1.5;
 }
 
-.about-section .about-content p {
+.home-section .about-content p {
   margin-bottom: 0.8rem;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
 }
 
-.about-section .about-content h3 {
+.home-section .about-content h3 {
   font-size: 1.1rem;
   margin: 1rem 0 0.5rem 0;
 }
 
-.about-section .about-content h4 {
+.home-section .about-content h4 {
   font-size: 1rem;
   margin: 0.8rem 0 0.4rem 0;
 }
 
-.about-section .about-content ul,
-.about-section .about-content ol {
-  font-size: 0.95rem;
+.home-section .about-content ul,
+.home-section .about-content ol {
+  font-size: 0.9rem;
 }
 
-.about-section .about-content li {
+.home-section .about-content li {
   margin-bottom: 0.3rem;
 }
 

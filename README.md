@@ -13,11 +13,12 @@ TBA
 ## TODO
 
 - [x] site template using this theme patch
+- [ ] refactor homepage layout to use sections/partials better
 - [ ] usage instructions
 - [x] adaptive layout for multiple devices
 - [ ] professional service section
 - [ ] merge header and About Section
-- [ ] Publication template (sort by year, sort by topic) 
+- [x] Publication template (sort by year, sort by topic) 
 - [ ] full News page
 - [ ] other custom page templates (recruitment, teaching, etc.)
 - [x] last updated timestamp on homepage

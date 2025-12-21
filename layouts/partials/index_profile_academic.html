@@ -1,5 +1,5 @@
 <div class="academic-home">
-  <div class="profile-section">
+  <div id="profile" class="home-header">
     <div class="profile-content">
       {{- if site.Params.profileMode.imageUrl }}
       <div class="profile-image">
@@ -59,7 +59,7 @@
 
   {{- $about := site.GetPage "about" }}
   {{- if $about }}
-  <section id="about" class="about-section">
+  <section id="about" class="home-section">
     <h2>About Me</h2>
     <div class="about-content">
       {{- if not ($about.Param "disableAnchoredHeadings") }}
@@ -73,7 +73,7 @@
   {{- $pubs := $pubsPage.Pages }}
   {{- $selectedPubs := where $pubs "Params.selected" true }}
   {{- if $selectedPubs }}
-  <section id="publications" class="selected-publications">
+  <section id="publications" class="home-section">
     <h2>Selected Publications
       {{- if $pubsPage }}<a href="{{ $pubsPage.Permalink }}" class="full-list-link">[Full List]</a>{{- end }}
       {{- range site.Params.socialIcons }}
@@ -83,7 +83,7 @@
     <div class="publications-legend" style="font-size: 0.8rem; margin-bottom: 0.3rem; text-align: left;">
       * Equal contribution; <sup>✉</sup> Corresponding author
     </div>
-    <div class="publications-list">
+    <div class="home-list">
       {{- range $selectedPubs }}
       {{- partial "publication_item.html" (dict "page" . "show_preview" true "show_description" true "show_links" true) -}}
       {{- end }}
@@ -94,11 +94,11 @@
   {{- $newsPage := site.GetPage "news" }}
   {{- $news := $newsPage.Pages }}
   {{- if $news }}
-  <section id="news" class="news-section">
+  <section id="news" class="home-section">
     <h2>Latest News</h2>
-    <div class="news-list">
+    <div class="home-list">
       {{- range first 5 $news }}
-      <div class="news-item">
+      <div class="home-item">
         <span class="news-date">{{ .Date.Format "2006-01-02" }}</span>
         <span class="news-content">{{ .Summary }}</span>
       </div>
@@ -108,11 +108,11 @@
   {{- end }}
 
   {{- if site.Params.profileMode.experience }}
-  <section id="experience" class="experience-section">
+  <section id="experience" class="home-section">
     <h2>Experience</h2>
-    <div class="experience-list">
+    <div class="home-list">
       {{- range site.Params.profileMode.experience }}
-      <div class="experience-item">
+      <div class="home-item">
         <div class="experience-details">
           {{- if .description }}
           <p class="experience-description">{{ .description | markdownify }}</p>
@@ -126,11 +126,11 @@
   {{- end }}
 
   {{- if site.Params.profileMode.awards }}
-  <section id="awards" class="awards-section">
+  <section id="awards" class="home-section">
     <h2>Selected Awards</h2>
-    <div class="awards-list">
+    <div class="home-list">
       {{- range site.Params.profileMode.awards }}
-      <div class="award-item">
+      <div class="home-item">
         <span class="award-year">{{ .year }}</span>
         <span class="award-name">{{ .name }}</span>
         {{- if .organization }}

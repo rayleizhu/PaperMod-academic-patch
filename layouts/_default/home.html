@@ -1,5 +1,6 @@
 {{- define "main" }}
 
+{{/*  only slightly modified PaperMod's singl.html template here  */}}
 {{- if (and site.Params.profileMode.enabled .IsHome) }}
   {{- if site.Params.profileMode.academic }}
   {{- partial "index_profile_academic.html" . }}
