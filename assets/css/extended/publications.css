@@ -50,3 +50,18 @@
   flex-direction: column;
   gap: 0.25rem;
 }
+
+@media (max-width: 768px) {
+  .publications-page .page-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .publications-page .publication-list-section h2 {
+    font-size: 1.1rem;
+  }
+
+  .publications-page .publication-toggle button {
+    padding: 3px 10px;
+    font-size: 0.8rem;
+  }
+}

@@ -248,7 +248,7 @@
     /* keep a fixed right column for period on mobile */
     flex: 0 0 12ch;
     width: 12ch;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     white-space: nowrap;
     text-align: right;
     font-variant-numeric: tabular-nums;
@@ -279,6 +279,20 @@
   .news-content p {
     display: inline;
     margin: 0;
+    font-size: 0.9rem;
+  }
+
+  .home-section h2 {
+    font-size: 1.1rem;
+  }
+
+  .advertising-content {
+    font-size: 0.85rem;
+  }
+
+  .home-section .about-content,
+  .home-section .about-content p {
+    font-size: 0.85rem;
   }
 }
 

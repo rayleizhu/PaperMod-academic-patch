@@ -2,7 +2,7 @@
   display: flex;
   gap: 1rem;
   padding: 0.3rem 1rem;
-  align-items: center;
+  align-items: left;
   border: 1px solid var(--border);
   border-left: 4px solid var(--primary);
   border-radius: 4px;
@@ -176,16 +176,16 @@
   }
   
   .publication-title {
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
   
   .publication-authors,
   .publication-description {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
   }
   
   .publication-venue {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
   }
   
   .publication-links {
