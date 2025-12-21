@@ -1,0 +1,12 @@
+<script>
+    (function() {
+        const menuTrigger = document.getElementById("menu-trigger");
+        const menu = document.getElementById("menu");
+        if (menuTrigger && menu) {
+            menuTrigger.addEventListener("click", function () {
+                menu.classList.toggle("show");
+                menuTrigger.classList.toggle("open");
+            });
+        }
+    })();
+</script>

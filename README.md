@@ -13,8 +13,9 @@ TBA
 ## TODO
 
 - [x] site template using this theme patch
-- [ ] refactor homepage layout to use sections/partials better
+- [x] refactor homepage layout to use sections/partials better
 - [ ] usage instructions
+- [ ] move profile config / experience / awards to About meta
 - [x] adaptive layout for multiple devices
 - [ ] professional service section
 - [ ] merge header and About Section

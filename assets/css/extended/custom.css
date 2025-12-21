@@ -23,3 +23,113 @@ iframe {
 .footer {
     max-width: calc(var(--nav-width) + var(--gap) * 2);
 }
+
+/* Mobile menu */
+#menu-trigger {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    .nav {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+        min-height: var(--header-height);
+        overflow: visible;
+    }
+
+    .logo {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0 var(--gap);
+        min-height: var(--header-height);
+    }
+
+    .logo-switches {
+        display: flex;
+        align-items: center;
+    }
+
+    #menu-trigger {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: none;
+        border: none;
+        padding: 0;
+        margin-inline-start: 12px;
+        cursor: pointer;
+        color: var(--primary);
+        /* Ensure it doesn't disappear */
+        z-index: 1001; 
+    }
+
+    #menu-trigger .feather-x {
+        display: none;
+    }
+
+    #menu-trigger.open .feather-menu {
+        display: none;
+    }
+
+    #menu-trigger.open .feather-x {
+        display: block;
+    }
+
+    #menu {
+        display: none;
+        position: absolute;
+        top: 100%; /* Position exactly at the bottom of the nav */
+        right: var(--gap);
+        left: auto;
+        width: auto;
+        min-width: 180px;
+        background: var(--theme);
+        opacity: 0.98;
+        backdrop-filter: blur(10px);
+        flex-direction: column;
+        margin: 0;
+        padding: 8px 0;
+        z-index: 1000;
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        /* Reset base theme styles */
+        white-space: normal;
+        overflow: visible;
+    }
+
+    #menu.show {
+        display: flex !important;
+    }
+
+    #menu li {
+        margin: 0 !important;
+        padding: 0;
+        text-align: left;
+        width: 100%;
+    }
+
+    #menu li + li {
+        margin-inline-start: 0;
+        border-top: 1px solid var(--border);
+    }
+
+    #menu a {
+        display: block;
+        width: 100%;
+        padding: 12px 20px;
+        font-size: 16px;
+        line-height: 1.5; /* Reset line-height from .nav */
+    }
+
+    #menu .active {
+        border-bottom: none;
+        /* background: var(--code-bg); */
+        font-weight: bold;
+    }
+}
