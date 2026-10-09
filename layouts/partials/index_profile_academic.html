@@ -1,6 +1,11 @@
-<div class="academic-home">
+{{- $about := site.GetPage "about" }}
+{{- $sideBySide := site.Params.profileMode.sideBySideAbout | default false }}
+<div class="academic-home{{ if $sideBySide }} profile-side{{ end }}">
   <div id="profile" class="home-header">
     <div class="profile-content">
+      {{/* avatar + identity stay together as one flex item, so on narrow screens
+           only the bio column wraps to its own row */}}
+      <div class="profile-identity">
       {{- if site.Params.profileMode.imageUrl }}
       <div class="profile-image">
         {{- $img := "" }}
@@ -48,6 +53,16 @@
         {{- end }}
         {{- partial "social_icons.html" (dict) -}}
       </div>
+      </div>
+      {{- if and $about $sideBySide }}
+      <div id="about" class="profile-about">
+        <div class="about-content">
+          {{- if not ($about.Param "disableAnchoredHeadings") }}
+          {{- partial "anchored_headings.html" $about.Content -}}
+          {{- else }}{{ $about.Content }}{{ end }}
+        </div>
+      </div>
+      {{- end }}
     </div>
     <div class="mobile-social">
       {{- partial "social_icons.html" (dict) -}}
@@ -57,8 +72,7 @@
   <div class="content-wrapper">
     <div class="main-content">
 
-  {{- $about := site.GetPage "about" }}
-  {{- if $about }}
+  {{- if and $about (not $sideBySide) }}
   <section id="about" class="home-section">
     <h2>About Me</h2>
     <div class="about-content">

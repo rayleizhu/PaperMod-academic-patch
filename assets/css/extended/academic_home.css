@@ -18,13 +18,25 @@
 
 .profile-content {
   display: flex;
-  gap: 1.5rem;
-  /* centre vertically: the avatar (200px) is taller than the text block, and
-     flex-start dumped all the leftover space below the icons */
-  align-items: center;
+  /* 1rem (was 1.5rem): the bio column also has its own padding-left, so the
+     visual separation is still ~40px */
+  gap: 1rem;
+  /* top-align the two columns. Centring looked fine at today's bio length but
+     pushes the avatar/name down as the bio grows (measured: 18px offset now,
+     83px at 2x the text, 202px at 4x). Avatar-vs-text centring happens on
+     .profile-identity, so it is unaffected here. */
+  align-items: flex-start;
   /* Centre the avatar + text as one group instead of hugging the left edge.
      Matches the small-screen rule below. */
   justify-content: center;
+}
+
+/* avatar + identity: one flex item so it never splits across rows */
+.profile-identity {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  flex-shrink: 0;
 }
 
 .profile-image {
@@ -34,6 +46,16 @@
 .profile-image img {
   border-radius: 50%;
   object-fit: cover;
+  width: var(--profile-avatar-size, 200px);
+  height: var(--profile-avatar-size, 200px);
+}
+
+/* Side-by-side layout only: a 160px avatar frees ~56px for the bio column, which
+   is enough for the text to need one line fewer and shortens the header ~45px.
+   Set via a custom property so the mobile rule below (120px) still wins, and so
+   turning the layout off restores the original 200px. */
+.profile-side {
+  --profile-avatar-size: 160px;
 }
 
 .profile-info h1.profile-name {
@@ -84,6 +106,17 @@
 .profile-info .social-icons a svg {
   width: 24px;
   height: 24px;
+}
+
+/* Bio moved into the header's right column, filling the width that used to be
+   empty (the avatar + identity group only took ~460 of the 900px column) */
+.profile-about {
+  flex: 1;
+  min-width: 0;
+  padding-left: 1.5rem;
+  border-left: 1px solid var(--border);
+  font-size: 0.9rem;
+  line-height: 1.5;
 }
 
 .mobile-social {
@@ -227,7 +260,24 @@
     align-items: center;
     text-align: left;
     gap: 0.9rem;
-    flex-wrap: nowrap;
+    /* wrap so the bio column can drop to its own full-width row below */
+    flex-wrap: wrap;
+  }
+
+  .profile-identity {
+    gap: 0.9rem;
+    /* let it shrink (the desktop rule pins it) so it fits narrow phones */
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .profile-info {
+    min-width: 0;
+  }
+
+  /* the obfuscated address is a single long token; allow it to break */
+  .profile-email {
+    overflow-wrap: anywhere;
   }
   
   .profile-info h1.profile-name {
@@ -333,19 +383,33 @@
     font-size: 0.85rem;
   }
 
+  /* Bio takes its own row under the avatar + identity block */
+  .profile-about {
+    flex: 1 1 100%;
+    padding-left: 0;
+    border-left: none;
+    margin-top: 0.6rem;
+    text-align: left;
+  }
+
   .home-section .about-content,
-  .home-section .about-content p {
+  .home-section .about-content p,
+  .profile-about .about-content,
+  .profile-about .about-content p {
     font-size: 0.85rem;
   }
 }
 
-/* About Me section consistency */
-.home-section .about-content {
+/* About Me consistency — the bio lives in the header column now, but keep the
+   old selectors in case it is ever rendered as its own section again */
+.home-section .about-content,
+.profile-about .about-content {
   font-size: 0.9rem;
   line-height: 1.5;
 }
 
-.home-section .about-content p {
+.home-section .about-content p,
+.profile-about .about-content p {
   margin-bottom: 0.8rem;
   font-size: 0.9rem;
 }
@@ -517,4 +581,12 @@
 .advertising-content strong {
     color: var(--primary);
     font-weight: 600;
+}
+
+/* Very narrow phones (<=340px): tighten the icon row so all 7 stay on one line
+   instead of leaving a lone icon on a second row */
+@media (max-width: 340px) {
+  .mobile-social .social-icons a {
+    padding: 4px;
+  }
 }
