@@ -19,7 +19,12 @@
 .profile-content {
   display: flex;
   gap: 1.5rem;
-  align-items: flex-start;
+  /* centre vertically: the avatar (200px) is taller than the text block, and
+     flex-start dumped all the leftover space below the icons */
+  align-items: center;
+  /* Centre the avatar + text as one group instead of hugging the left edge.
+     Matches the small-screen rule below. */
+  justify-content: center;
 }
 
 .profile-image {
@@ -55,6 +60,30 @@
 .profile-email {
   margin: 0.8rem 0;
   font-size: 0.95rem;
+}
+
+/* PaperMod gives every icon link 10px padding, which made the 7-icon row ~356px
+   while the text column is only ~238px, so the icons stuck out to the right. */
+.profile-info .social-icons {
+  /* flex (instead of inline flow) drops the ~6px of whitespace the markup puts
+     between each icon */
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  /* pull back by the link padding so the first icon lines up with the text */
+  margin-left: -3px;
+}
+
+.profile-info .social-icons a {
+  padding: 3px;
+}
+
+/* 24px instead of 26px: 7 icons then take 210px, comfortably under the 206-238px
+   the text column needs depending on font rendering, so the row neither sticks
+   out past the text nor wraps a lone icon onto a second line */
+.profile-info .social-icons a svg {
+  width: 24px;
+  height: 24px;
 }
 
 .mobile-social {
@@ -235,6 +264,20 @@
     gap: 0.5rem;
     margin-top: 0.6rem;
     width: 100%;
+  }
+
+  /* Same whitespace fix as the desktop header: the newlines in the markup add
+     ~6px between icons, which pushed the 7-icon row onto a second line on
+     common phone widths. Slightly tighter padding keeps it on one line. */
+  .mobile-social .social-icons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .mobile-social .social-icons a {
+    padding: 6px;
   }
   
   .home-item {
