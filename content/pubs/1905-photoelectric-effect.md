@@ -6,7 +6,9 @@ award: "Nobel Prize in Physics"
 venue: "Annals of Physics"
 abbr: "Ann. Phys."
 year: 1905
+topics: ["Quantum Theory"]
 full_text: "https://en.wikisource.org/wiki/On_a_Heuristic_Point_of_View_Concerning_the_Production_and_Transformation_of_Light"
+html: "https://en.wikipedia.org/wiki/Photoelectric_effect"
 selected: true
 ---
 

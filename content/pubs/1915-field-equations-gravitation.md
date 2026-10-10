@@ -2,10 +2,11 @@
 title: "The Field Equations of Gravitation"
 date: 1915-11-25
 authors: ["Your Name", "Coauthor1", "Coauthor2"]
-corresponding_author: "Your Name"
+corresponding_authors: ["Your Name"]
 venue: "Proceedings of the Royal Prussian Academy of Sciences (Berlin)"
 abbr: "KPAW"
 year: 1915
+topics: ["Relativity", "Gravitation"]
 preview: "general_relativity.png"
 code: "https://github.com/rayleizhu/PaperMod-academic-patch"
 full_text: "https://de.wikisource.org/wiki/Die_Feldgleichungen_der_Gravitation"

@@ -36,6 +36,7 @@ params:
     #######################
     academic: true
     showToc: false
+    sideBySideAbout: false # move the bio (content/about.md) beside the profile instead of below it
     title: "Your Name"
     nameInPub: "Your Name"
     subtitle: "Your Profession"
@@ -89,6 +90,9 @@ params:
     - name: dblp
       title: DBLP
       url: "https://dblp.org/search?q=Albert+Einstein"
+    - name: alphaxiv
+      title: alphaXiv
+      url: "https://alphaxiv.org/"
     # - name: cv
     #   title: CV
     #   url: "/cv.pdf"
@@ -197,9 +201,12 @@ languages:
         - name: About
           url: /
           weight: 5
-        # - name: Publications
-        #   url: pubs/
-        #   weight: 8
+        - name: Publications
+          url: pubs/
+          weight: 8
+        - name: News
+          url: news/
+          weight: 9
         - name: Blog
           url: blog/
           weight: 10

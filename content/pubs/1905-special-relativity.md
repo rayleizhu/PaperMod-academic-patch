@@ -8,6 +8,7 @@ venue: "Annals of Physics"
 abbr: "Ann. Phys."
 preview: "special_relativity.png"
 year: 1905
+topics: ["Relativity"]
 full_text: "https://en.wikisource.org/wiki/On_the_Electrodynamics_of_Moving_Bodies"
 selected: true
 ---
