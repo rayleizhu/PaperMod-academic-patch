@@ -6,6 +6,7 @@ on:
       - "images/**"
       - "LICENSE"
       - "README.md"
+      - "README-zh.md"
     branches:
       - exampleSite
   workflow_dispatch:
