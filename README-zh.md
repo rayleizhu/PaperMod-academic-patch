@@ -4,7 +4,7 @@
 
 [PaperMod-academic-patch](https://github.com/rayleizhu/PaperMod-academic-patch) 学术主页主题的示例站点：既用来展示主题效果，也可以直接 fork 后当成个人主页的起点。
 
-> Demo站点：<https://rayleizhu.github.io/PaperMod-Academic-patch/>
+> Demo站点：<https://www.rayleizhu.com/PaperMod-academic-patch/>
 >
 > 开发者个人主页（使用本模板）：<https://rayleizhu.github.io/>
 >

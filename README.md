@@ -4,7 +4,7 @@ English | [简体中文](README-zh.md)
 
 Demo site for the [PaperMod-academic-patch](https://github.com/rayleizhu/PaperMod-academic-patch) academic homepage theme: it shows what the theme looks like, and it can also be forked as the starting point of your own homepage.
 
-> Live site: <https://rayleizhu.github.io/PaperMod-Academic-patch/>
+> Demo site: <https://www.rayleizhu.com/PaperMod-academic-patch/>
 >
 > Developer's personal homepage (built with this template): <https://rayleizhu.github.io/>
 >
@@ -137,7 +137,7 @@ hugo                                   # build only, output goes to public/
 └── .github/workflows/gh-pages.yml
 ```
 
-## Day-to-day Maintenance
+## Maintenance
 
 ### Update your personal information
 
