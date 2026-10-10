@@ -1,0 +1,30 @@
+{{- define "main" -}}
+
+<div class="news-page">
+  <header class="page-header">
+    {{- partial "breadcrumbs.html" . }}
+    <h1>{{ .Title }}</h1>
+    {{- if .Description }}
+    <div class="post-description">
+      {{ .Description | markdownify }}
+    </div>
+    {{- end }}
+  </header>
+
+  {{- $pages := .Pages }}
+  {{- range sort ($pages.GroupByDate "2006") "Key" "desc" }}
+  <section class="news-year">
+    <h2>{{ .Key }}</h2>
+    <div class="home-list">
+      {{- range .Pages.ByDate.Reverse }}
+      <div class="home-item">
+        <span class="news-date">{{ .Date.Format "2006-01-02" }}</span>
+        <span class="news-content">{{ .Content }}</span>
+      </div>
+      {{- end }}
+    </div>
+  </section>
+  {{- end }}
+</div> {{/* end of news-page */}}
+
+{{- end -}}

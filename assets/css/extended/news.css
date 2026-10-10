@@ -1,0 +1,43 @@
+.news-page .page-header {
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+.news-page .page-header h1 {
+  margin-top: 0;
+  margin-bottom: 5px;
+  font-size: 2rem;
+}
+
+.news-page .post-description {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.news-page .news-year h2 {
+  margin-top: 15px;
+  margin-bottom: 5px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  font-size: 1.3rem;
+}
+
+.news-page .home-list {
+  gap: 0.25rem;
+}
+
+/* news entries are single paragraphs: keep them inline with the date */
+.news-page .news-content p {
+  display: inline;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .news-page .page-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .news-page .news-year h2 {
+    font-size: 1.1rem;
+  }
+}

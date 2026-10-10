@@ -109,7 +109,9 @@
   {{- $news := $newsPage.Pages }}
   {{- if $news }}
   <section id="news" class="home-section">
-    <h2>Latest News</h2>
+    <h2>Latest News
+      {{- if $newsPage }}<a href="{{ $newsPage.Permalink }}" class="full-list-link">[Full List]</a>{{- end }}
+    </h2>
     <div class="home-list">
       {{- range first 5 $news }}
       <div class="home-item">
